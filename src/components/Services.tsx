@@ -1,41 +1,53 @@
 'use client'
 const items=[
-  {icon:'🏢',title:'Corporate Events',img:'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?q=80&w=600&auto=format&fit=crop',desc:'Conferences, launches & annual meets'},
-  {icon:'🏛️',title:'Government Programs',img:'https://images.unsplash.com/photo-1529070538774-1843cb3265df?q=80&w=600&auto=format&fit=crop',desc:'Official ceremonies with protocol'},
-  {icon:'💍',title:'Weddings',img:'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=600&auto=format&fit=crop',desc:'Royal Rajasthani celebrations'},
-  {icon:'🎵',title:'Musical Nights',img:'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?q=80&w=600&auto=format&fit=crop',desc:'Live concerts & performances'},
-  {icon:'🌙',title:'Ghazal Evenings',img:'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=600&auto=format&fit=crop',desc:'Soulful Sufi & Ghazal nights'},
-  {icon:'📜',title:'Mushaira',img:'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=600&auto=format&fit=crop',desc:'Literary & poetry events'},
-  {icon:'🎙️',title:'Open Mic',img:'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?q=80&w=600&auto=format&fit=crop',desc:'Creative expression platforms'},
-  {icon:'🔊',title:'Stage & Production',img:'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=600&auto=format&fit=crop',desc:'Sound, light & AV production'},
-  {icon:'🌟',title:'Artist Management',img:'https://images.unsplash.com/photo-1549451371-64aa98a6f660?q=80&w=600&auto=format&fit=crop',desc:'Talent booking & coordination'},
+  {icon:'🏢',title:'Corporate Events',desc:'Conferences, launches & annual meets that actually slap'},
+  {icon:'🏛️',title:'Govt Programs',desc:'Official ceremonies executed with protocol & dignity'},
+  {icon:'💍',title:'Weddings',desc:'Royal Rajasthani celebrations that hit different'},
+  {icon:'🎵',title:'Musical Nights',desc:'Live concerts & performances that go crazy'},
+  {icon:'🌙',title:'Ghazal Evenings',desc:'Soulful nights you can't forget'},
+  {icon:'📜',title:'Mushaira',desc:'Literary & poetry events for the culture'},
+  {icon:'🎙️',title:'Open Mic',desc:'Platform for artists to shine bright'},
+  {icon:'🔊',title:'Stage Production',desc:'Sound, lights & AV that hits hard'},
+  {icon:'🌟',title:'Artist Management',desc:'Talent booking & full coordination'},
 ]
 export default function Services(){
   return(
-    <section id="services" className="bg-[#0d0d0d] py-24 border-t border-white/5">
-      <div className="max-w-screen-xl mx-auto px-8 md:px-16 lg:px-24 mb-12">
-        <p className="text-[#C9A84C] text-[10px] tracking-[0.5em] uppercase mb-4">What We Do</p>
-        <h2 className="text-white text-4xl md:text-5xl font-bold tracking-tight">Our Services</h2>
+    <section id="services" className="bg-[#C1121F] py-24 relative overflow-hidden">
+      {/* Decorative mandala bg */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] opacity-5 animate-spin-slow pointer-events-none">
+        <svg viewBox="0 0 200 200">
+          {[0,20,40,60,80,100,120,140,160,180].map((a,i)=>(
+            <ellipse key={i} cx="100" cy="30" rx="12" ry="28" fill="white" transform={`rotate(${a} 100 100)`}/>
+          ))}
+          <circle cx="100" cy="100" r="20" fill="white"/>
+        </svg>
       </div>
 
-      {/* Horizontal scroll */}
-      <div className="overflow-x-auto scrollbar-none pl-8 md:pl-16 lg:pl-24">
-        <div className="flex gap-4 pb-2" style={{width:'max-content'}}>
+      <div className="max-w-screen-xl mx-auto px-8 md:px-16 lg:px-24 relative z-10">
+        <div className="mb-12">
+          <span className="inline-block px-3 py-1 bg-white/20 text-white text-[10px] tracking-[0.4em] uppercase font-bold rounded-full mb-4">What We Do</span>
+          <h2 className="font-display text-white text-4xl md:text-5xl font-extrabold tracking-tight">
+            Our Services
+          </h2>
+        </div>
+
+        {/* Grid — 3 cols desktop, 2 mobile, NO images */}
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
           {items.map((item,i)=>(
-            <div key={i} className="group flex-shrink-0 border border-white/8 hover:border-[#C9A84C]/40 transition-all duration-300 overflow-hidden" style={{width:'240px'}}>
-              {/* Small image peek */}
-              <div className="relative overflow-hidden" style={{height:'180px'}}>
-                <img src={item.img} alt={item.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-70 group-hover:opacity-90"/>
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0d0d0d] via-transparent to-transparent"/>
-              </div>
-              <div className="p-5">
-                <div className="text-2xl mb-3">{item.icon}</div>
-                <h3 className="text-white font-semibold text-sm mb-1.5 tracking-wide">{item.title}</h3>
-                <p className="text-white/35 text-xs leading-relaxed">{item.desc}</p>
-              </div>
+            <div key={i} className={`group p-5 md:p-6 bg-white/10 hover:bg-white border border-white/20 hover:border-transparent transition-all duration-300 cursor-default ${i===0?'md:col-span-1':''}`}>
+              <div className="text-3xl mb-4">{item.icon}</div>
+              <h3 className="font-display text-white group-hover:text-[#C1121F] font-bold text-sm md:text-base mb-2 tracking-tight transition-colors">{item.title}</h3>
+              <p className="text-white/50 group-hover:text-[#1A0A00]/50 text-xs leading-relaxed transition-colors">{item.desc}</p>
             </div>
           ))}
-          <div className="flex-shrink-0 w-8"/>
+        </div>
+
+        {/* CTA strip */}
+        <div className="mt-10 flex flex-col sm:flex-row items-center justify-between gap-4 p-6 bg-white/10 border border-white/20">
+          <p className="text-white font-display font-bold text-lg">Ready to create something epic?</p>
+          <a href="/#contact" className="px-8 py-3 bg-white text-[#C1121F] font-bold text-xs tracking-[0.2em] uppercase hover:bg-[#FFF8F0] transition-all flex-shrink-0">
+            Let&apos;s Talk 🚀
+          </a>
         </div>
       </div>
     </section>
