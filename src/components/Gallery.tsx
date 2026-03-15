@@ -15,6 +15,7 @@ const sample:GalleryItem[]=[
   {id:'10',image_url:'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=800',title:'Literary',category:'Literary',event_id:'',is_published:true,sort_order:10,created_at:''},
 ]
 const cats=['All','Weddings','Corporate','Musical','Cultural','Literary']
+const widths=['w-64','w-48','w-56','w-64','w-52','w-60']
 export default function Gallery(){
   const [items,setItems]=useState<GalleryItem[]>([])
   const [lb,setLb]=useState<GalleryItem|null>(null)
@@ -23,15 +24,31 @@ export default function Gallery(){
   const filtered=f==='All'?items:items.filter(i=>i.category===f)
   return(
     <section id="gallery" className="bg-[#C1121F] py-24 relative overflow-hidden">
-      {/* Decorative corner lotuses */}
-      <div className="absolute top-4 left-4 opacity-20">
-        <svg viewBox="0 0 80 80" className="w-20 h-20">
-          {[0,45,90,135,180,225,270,315].map((a,i)=><ellipse key={i} cx="40" cy="15" rx="6" ry="14" fill="white" transform={`rotate(${a} 40 40)`}/>)}
+      {/* Corner lotus decorations - hardcoded SVG */}
+      <div className="absolute top-5 left-5 opacity-15 pointer-events-none">
+        <svg viewBox="0 0 60 60" className="w-16 h-16">
+          <ellipse cx="30" cy="10" rx="5" ry="11" fill="white"/>
+          <ellipse cx="30" cy="10" rx="5" ry="11" fill="white" transform="rotate(45 30 30)"/>
+          <ellipse cx="30" cy="10" rx="5" ry="11" fill="white" transform="rotate(90 30 30)"/>
+          <ellipse cx="30" cy="10" rx="5" ry="11" fill="white" transform="rotate(135 30 30)"/>
+          <ellipse cx="30" cy="10" rx="5" ry="11" fill="white" transform="rotate(180 30 30)"/>
+          <ellipse cx="30" cy="10" rx="5" ry="11" fill="white" transform="rotate(225 30 30)"/>
+          <ellipse cx="30" cy="10" rx="5" ry="11" fill="white" transform="rotate(270 30 30)"/>
+          <ellipse cx="30" cy="10" rx="5" ry="11" fill="white" transform="rotate(315 30 30)"/>
+          <circle cx="30" cy="30" r="7" fill="white"/>
         </svg>
       </div>
-      <div className="absolute top-4 right-4 opacity-20">
-        <svg viewBox="0 0 80 80" className="w-20 h-20">
-          {[0,45,90,135,180,225,270,315].map((a,i)=><ellipse key={i} cx="40" cy="15" rx="6" ry="14" fill="white" transform={`rotate(${a} 40 40)`}/>)}
+      <div className="absolute top-5 right-5 opacity-15 pointer-events-none">
+        <svg viewBox="0 0 60 60" className="w-16 h-16">
+          <ellipse cx="30" cy="10" rx="5" ry="11" fill="white"/>
+          <ellipse cx="30" cy="10" rx="5" ry="11" fill="white" transform="rotate(45 30 30)"/>
+          <ellipse cx="30" cy="10" rx="5" ry="11" fill="white" transform="rotate(90 30 30)"/>
+          <ellipse cx="30" cy="10" rx="5" ry="11" fill="white" transform="rotate(135 30 30)"/>
+          <ellipse cx="30" cy="10" rx="5" ry="11" fill="white" transform="rotate(180 30 30)"/>
+          <ellipse cx="30" cy="10" rx="5" ry="11" fill="white" transform="rotate(225 30 30)"/>
+          <ellipse cx="30" cy="10" rx="5" ry="11" fill="white" transform="rotate(270 30 30)"/>
+          <ellipse cx="30" cy="10" rx="5" ry="11" fill="white" transform="rotate(315 30 30)"/>
+          <circle cx="30" cy="30" r="7" fill="white"/>
         </svg>
       </div>
       <div className="max-w-screen-xl mx-auto px-8 md:px-16 lg:px-24 relative z-10">
@@ -49,12 +66,11 @@ export default function Gallery(){
             ))}
           </div>
         </div>
-        {/* Horizontal scroll */}
         <div className="overflow-x-auto scrollbar-none -mx-4 px-4">
           <div className="flex gap-3" style={{width:'max-content'}}>
             {filtered.map((item,i)=>(
               <div key={item.id}
-                className={`group relative flex-shrink-0 overflow-hidden cursor-pointer border-2 border-transparent hover:border-white transition-all duration-300 ${i%3===0?'w-64 h-72':i%3===1?'w-48 h-72':'w-56 h-72'}`}
+                className={`group relative flex-shrink-0 overflow-hidden cursor-pointer border-2 border-transparent hover:border-white transition-all duration-300 h-72 ${widths[i%6]}`}
                 onClick={()=>setLb(item)}>
                 <img src={item.image_url} alt={item.title||''} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"/>
                 <div className="absolute inset-0 bg-[#C1121F]/0 group-hover:bg-[#C1121F]/30 transition-all duration-300"/>
@@ -68,7 +84,7 @@ export default function Gallery(){
       </div>
       {lb&&(
         <div className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4" onClick={()=>setLb(null)}>
-          <button className="absolute top-6 right-6 text-white/50 hover:text-white" onClick={()=>setLb(null)}><X size={28}/></button>
+          <button className="absolute top-6 right-6 text-white/50 hover:text-white transition-colors" onClick={()=>setLb(null)}><X size={28}/></button>
           <div className="max-w-5xl w-full" onClick={e=>e.stopPropagation()}>
             <img src={lb.image_url} alt={lb.title||''} className="w-full max-h-[85vh] object-contain"/>
             {lb.title&&<p className="text-center text-white/40 mt-3 text-xs tracking-widest uppercase">{lb.title}</p>}
