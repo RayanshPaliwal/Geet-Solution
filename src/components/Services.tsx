@@ -1,46 +1,36 @@
 'use client'
-const services = [
-  {icon:'🏢',title:'Corporate Events & Conferences',desc:'Professional corporate gatherings, conferences, seminars, product launches executed with precision and style.'},
-  {icon:'🏛️',title:'Government & Official Programs',desc:'Official government ceremonies, public events, foundation days organized with protocol and dignity.'},
-  {icon:'🎉',title:'Private Celebrations & Social Events',desc:'Weddings, anniversaries, birthdays transformed into timeless memories with Rajasthani elegance.'},
-  {icon:'🎵',title:'Musical Nights & Live Performances',desc:'Concerts, Sufi evenings, classical music nights organized with world-class production.'},
-  {icon:'🌙',title:'Ghazal & Cultural Evenings',desc:'Soul-stirring Ghazal evenings and rich cultural programs celebrating the heritage of Rajasthan.'},
-  {icon:'📜',title:'Mushaira & Literary Events',desc:'Prestigious literary gatherings, poetry festivals, and Mushaira events for discerning audiences.'},
-  {icon:'🎙️',title:'Open Mic & Creative Platforms',desc:'Creative expression platforms for artists, performers, and talent to showcase their skills.'},
-  {icon:'🔊',title:'Stage, Sound & Technical Production',desc:'End-to-end technical production — stage design, sound systems, lighting, LED screens and AV.'},
-  {icon:'🌟',title:'Artist & Talent Management',desc:'Complete artist management — booking, coordination, and management of performers and singers.'},
+const items = [
+  {icon:'🏢',title:'Corporate Events',img:'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?q=80&w=600&auto=format&fit=crop'},
+  {icon:'🏛️',title:'Government Programs',img:'https://images.unsplash.com/photo-1529070538774-1843cb3265df?q=80&w=600&auto=format&fit=crop'},
+  {icon:'💍',title:'Weddings',img:'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=600&auto=format&fit=crop'},
+  {icon:'🎵',title:'Musical Nights',img:'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?q=80&w=600&auto=format&fit=crop'},
+  {icon:'🌙',title:'Ghazal Evenings',img:'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=600&auto=format&fit=crop'},
+  {icon:'📜',title:'Mushaira',img:'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=600&auto=format&fit=crop'},
+  {icon:'🎙️',title:'Open Mic',img:'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?q=80&w=600&auto=format&fit=crop'},
+  {icon:'🔊',title:'Stage & Production',img:'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=600&auto=format&fit=crop'},
+  {icon:'🌟',title:'Artist Management',img:'https://images.unsplash.com/photo-1549451371-64aa98a6f660?q=80&w=600&auto=format&fit=crop'},
 ]
 export default function Services() {
   return (
-    <section id="services" className="py-20 md:py-28 bg-gradient-to-b from-[#0a0005] via-red-950/20 to-[#0a0005] relative">
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-yellow-500/40 to-transparent" />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <p className="font-hindi text-yellow-400/60 text-base mb-2">हमारी सेवाएं</p>
-          <h2 className="font-display text-4xl md:text-5xl text-gold-gradient mb-4">Our Expertise</h2>
-          <div className="ornament-divider max-w-xs mx-auto mb-6"><span className="text-yellow-400 px-4 font-serif italic text-yellow-100/50">What We Do</span></div>
-          <p className="text-yellow-100/55 max-w-2xl mx-auto leading-relaxed">From intimate gatherings to grand productions, every detail is curated with care, passion, and perfection.</p>
-        </div>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((s,i) => (
-            <div key={i} className="relative p-6 bg-red-950/20 border border-yellow-500/10 hover:border-yellow-500/30 transition-all duration-300 group hover:-translate-y-1 overflow-hidden">
-              <div className="absolute top-0 right-0 w-8 h-8 border-t border-r border-yellow-500/20 group-hover:border-yellow-500/40 transition-colors" />
-              <div className="absolute bottom-0 left-0 w-8 h-8 border-b border-l border-yellow-500/20 group-hover:border-yellow-500/40 transition-colors" />
-              <div className="text-4xl mb-4 transform group-hover:scale-110 transition-transform">{s.icon}</div>
-              <h3 className="font-heading text-lg text-yellow-300 mb-3 group-hover:text-yellow-200 transition-colors">{s.title}</h3>
-              <p className="text-yellow-100/55 text-sm leading-relaxed">{s.desc}</p>
-              <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-500 to-orange-500 group-hover:w-full transition-all duration-500" />
-            </div>
-          ))}
-        </div>
-        <div className="text-center mt-14">
-          <div className="inline-flex flex-col items-center gap-4 p-8 border border-yellow-500/20 bg-yellow-500/3 max-w-lg">
-            <p className="font-heading text-xl text-yellow-100/80 italic">&ldquo;Thoughtful planning · Creative concepts · Luxury presentation&rdquo;</p>
-            <a href="#contact" className="px-8 py-3 bg-red-900 hover:bg-red-800 border border-yellow-500/40 text-yellow-300 tracking-widest uppercase text-sm transition-all">Discuss Your Event</a>
-          </div>
-        </div>
+    <section id="services" className="bg-black py-20">
+      <div className="text-center mb-12 px-6">
+        <p className="text-yellow-400 text-xs tracking-[0.4em] uppercase mb-3">What We Do</p>
+        <h2 className="text-white text-4xl md:text-5xl font-serif">Our Expertise</h2>
       </div>
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-yellow-500/40 to-transparent" />
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-0.5 bg-yellow-900/20">
+        {items.map((item, i) => (
+          <div key={i} className="group relative overflow-hidden aspect-square cursor-pointer">
+            <img src={item.img} alt={item.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"/>
+            <div className="absolute inset-0 bg-black/50 group-hover:bg-black/30 transition-colors duration-300"/>
+            <div className="absolute inset-0 flex flex-col items-center justify-center">
+              <span className="text-4xl mb-3 drop-shadow-lg">{item.icon}</span>
+              <p className="text-white font-serif text-lg md:text-xl text-center px-4 drop-shadow-lg">{item.title}</p>
+            </div>
+            {/* Hover border */}
+            <div className="absolute inset-0 border-2 border-yellow-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"/>
+          </div>
+        ))}
+      </div>
     </section>
   )
 }
