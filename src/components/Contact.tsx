@@ -1,103 +1,87 @@
 'use client'
-import { useState } from 'react'
-import { Phone, Mail, MapPin, Send, CheckCircle, Instagram, Facebook } from 'lucide-react'
-import { submitInquiry } from '@/lib/supabase'
-
-const eventTypes = ['Corporate Event','Government Program','Wedding','Musical Night','Ghazal Evening','Mushaira','Open Mic','Private Celebration','Other']
-
-export default function Contact() {
-  const [form, setForm] = useState({name:'',email:'',phone:'',event_type:'',message:''})
-  const [loading, setLoading] = useState(false)
-  const [success, setSuccess] = useState(false)
-
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault(); setLoading(true)
-    try { await submitInquiry(form); setSuccess(true); setForm({name:'',email:'',phone:'',event_type:'',message:''}) }
-    catch { }
-    finally { setLoading(false) }
+import {useState} from 'react'
+import {Phone,Mail,Send,CheckCircle,Instagram,Youtube} from 'lucide-react'
+import {submitInquiry} from '@/lib/supabase'
+const types=['Corporate Event','Government Program','Wedding','Musical Night','Ghazal Evening','Mushaira','Open Mic','Private Celebration','Other']
+export default function Contact(){
+  const [form,setForm]=useState({name:'',email:'',phone:'',event_type:'',message:''})
+  const [loading,setLoading]=useState(false)
+  const [ok,setOk]=useState(false)
+  async function submit(e:React.FormEvent){
+    e.preventDefault();setLoading(true)
+    try{await submitInquiry(form);setOk(true);setForm({name:'',email:'',phone:'',event_type:'',message:''})}catch{}finally{setLoading(false)}
   }
-
-  return (
-    <section id="contact" className="bg-black">
-      <div className="grid lg:grid-cols-2 min-h-screen">
-        {/* Left - Big photo */}
-        <div className="relative hidden lg:block">
-          <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1200&auto=format&fit=crop"
-            alt="Contact" className="w-full h-full object-cover"/>
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent to-black/60"/>
-          <div className="absolute bottom-12 left-12 right-12">
-            <p className="text-yellow-400 text-xs tracking-[0.4em] uppercase mb-3">Udaipur, Rajasthan</p>
-            <h2 className="text-white text-4xl font-serif leading-tight mb-6">Let&apos;s Create<br/>Something<br/>Extraordinary</h2>
-            <div className="space-y-4">
-              <a href="tel:+919999999999" className="flex items-center gap-3 text-white/80 hover:text-yellow-400 transition-colors">
-                <div className="w-10 h-10 border border-yellow-500/40 flex items-center justify-center flex-shrink-0"><Phone size={16} className="text-yellow-400"/></div>
-                <span>+91 99999 99999</span>
-              </a>
-              <a href="mailto:info@geetsolutions.in" className="flex items-center gap-3 text-white/80 hover:text-yellow-400 transition-colors">
-                <div className="w-10 h-10 border border-yellow-500/40 flex items-center justify-center flex-shrink-0"><Mail size={16} className="text-yellow-400"/></div>
-                <span>info@geetsolutions.in</span>
-              </a>
-              <div className="flex items-center gap-3 text-white/80">
-                <div className="w-10 h-10 border border-yellow-500/40 flex items-center justify-center flex-shrink-0"><MapPin size={16} className="text-yellow-400"/></div>
-                <span>Udaipur, Rajasthan — 313001</span>
+  return(
+    <section id="contact" className="bg-[#0d0d0d] border-t border-white/5">
+      <div className="grid lg:grid-cols-2 min-h-[85vh]">
+        {/* Left — dark info panel */}
+        <div className="flex flex-col justify-between p-10 md:p-16 lg:p-20 bg-[#0a0a0a] border-r border-white/5">
+          <div>
+            <p className="text-[#C9A84C] text-[10px] tracking-[0.5em] uppercase mb-6">Get In Touch</p>
+            <h2 className="text-white text-4xl md:text-5xl font-bold leading-tight tracking-tight mb-8">
+              Let&apos;s Build<br/>Something<br/><span className="text-[#C9A84C]">Unforgettable</span>
+            </h2>
+            <p className="text-white/35 text-sm leading-relaxed max-w-sm">
+              Tell us about your event and we&apos;ll craft an experience that exceeds every expectation.
+            </p>
+          </div>
+          <div className="space-y-6 mt-12">
+            <a href="tel:+919999999999" className="flex items-center gap-4 group">
+              <div className="w-11 h-11 border border-white/10 group-hover:border-[#C9A84C] flex items-center justify-center transition-colors flex-shrink-0">
+                <Phone size={15} className="text-[#C9A84C]"/>
               </div>
-            </div>
-            <div className="flex gap-3 mt-6">
-              <a href="#" className="w-10 h-10 border border-white/20 hover:border-yellow-400 flex items-center justify-center text-white/60 hover:text-yellow-400 transition-all"><Instagram size={16}/></a>
-              <a href="#" className="w-10 h-10 border border-white/20 hover:border-yellow-400 flex items-center justify-center text-white/60 hover:text-yellow-400 transition-all"><Facebook size={16}/></a>
+              <div>
+                <p className="text-white/20 text-[9px] tracking-[0.3em] uppercase mb-0.5">Phone</p>
+                <p className="text-white/70 group-hover:text-white text-sm transition-colors">+91 99999 99999</p>
+              </div>
+            </a>
+            <a href="mailto:info@geetsolutions.in" className="flex items-center gap-4 group">
+              <div className="w-11 h-11 border border-white/10 group-hover:border-[#C9A84C] flex items-center justify-center transition-colors flex-shrink-0">
+                <Mail size={15} className="text-[#C9A84C]"/>
+              </div>
+              <div>
+                <p className="text-white/20 text-[9px] tracking-[0.3em] uppercase mb-0.5">Email</p>
+                <p className="text-white/70 group-hover:text-white text-sm transition-colors">info@geetsolutions.in</p>
+              </div>
+            </a>
+            <div className="flex gap-3 pt-4">
+              <a href="#" className="w-9 h-9 border border-white/10 hover:border-[#C9A84C] flex items-center justify-center text-white/30 hover:text-[#C9A84C] transition-all"><Instagram size={14}/></a>
+              <a href="#" className="w-9 h-9 border border-white/10 hover:border-[#C9A84C] flex items-center justify-center text-white/30 hover:text-[#C9A84C] transition-all"><Youtube size={14}/></a>
             </div>
           </div>
         </div>
-
-        {/* Right - Form */}
-        <div className="flex items-center justify-center p-8 md:p-16 bg-[#0a0005]">
-          <div className="w-full max-w-md">
-            <p className="text-yellow-400 text-xs tracking-[0.4em] uppercase mb-3">Get In Touch</p>
-            <h2 className="text-white text-3xl font-serif mb-8">Book Your Event</h2>
-
-            {success ? (
-              <div className="text-center py-16">
-                <CheckCircle size={56} className="text-yellow-400 mx-auto mb-4"/>
-                <h3 className="text-white text-2xl font-serif mb-3">Message Sent!</h3>
-                <p className="text-white/50 mb-6">We&apos;ll contact you within 24 hours.</p>
-                <button onClick={() => setSuccess(false)} className="px-8 py-3 border border-yellow-500 text-yellow-400 text-sm tracking-widest uppercase hover:bg-yellow-500 hover:text-black transition-all">
-                  Send Another
-                </button>
+        {/* Right — form */}
+        <div className="flex items-center justify-center p-10 md:p-16 lg:p-20">
+          {ok?(
+            <div className="text-center">
+              <CheckCircle size={52} className="text-[#C9A84C] mx-auto mb-5"/>
+              <h3 className="text-white text-2xl font-bold mb-3">Message Sent!</h3>
+              <p className="text-white/35 text-sm mb-8">We&apos;ll reach out within 24 hours.</p>
+              <button onClick={()=>setOk(false)} className="px-8 py-3 border border-[#C9A84C]/40 text-[#C9A84C] text-xs tracking-[0.2em] uppercase hover:bg-[#C9A84C] hover:text-black transition-all">Send Another</button>
+            </div>
+          ):(
+            <form onSubmit={submit} className="w-full max-w-md space-y-4">
+              <div className="grid grid-cols-2 gap-4">
+                <input required value={form.name} onChange={e=>setForm({...form,name:e.target.value})} placeholder="Your Name"
+                  className="col-span-2 bg-white/3 border border-white/8 focus:border-[#C9A84C]/60 text-white text-sm px-4 py-3.5 outline-none transition-colors placeholder:text-white/20"/>
+                <input required type="tel" value={form.phone} onChange={e=>setForm({...form,phone:e.target.value})} placeholder="Phone"
+                  className="bg-white/3 border border-white/8 focus:border-[#C9A84C]/60 text-white text-sm px-4 py-3.5 outline-none transition-colors placeholder:text-white/20"/>
+                <input type="email" value={form.email} onChange={e=>setForm({...form,email:e.target.value})} placeholder="Email"
+                  className="bg-white/3 border border-white/8 focus:border-[#C9A84C]/60 text-white text-sm px-4 py-3.5 outline-none transition-colors placeholder:text-white/20"/>
               </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
-                  <input required value={form.name} onChange={e => setForm({...form,name:e.target.value})}
-                    placeholder="Your Name" className="col-span-2 bg-white/5 border border-white/10 focus:border-yellow-500 text-white px-4 py-3 text-sm outline-none transition-colors placeholder:text-white/30"/>
-                  <input required type="tel" value={form.phone} onChange={e => setForm({...form,phone:e.target.value})}
-                    placeholder="Phone Number" className="bg-white/5 border border-white/10 focus:border-yellow-500 text-white px-4 py-3 text-sm outline-none transition-colors placeholder:text-white/30"/>
-                  <input type="email" value={form.email} onChange={e => setForm({...form,email:e.target.value})}
-                    placeholder="Email" className="bg-white/5 border border-white/10 focus:border-yellow-500 text-white px-4 py-3 text-sm outline-none transition-colors placeholder:text-white/30"/>
-                </div>
-                <select value={form.event_type} onChange={e => setForm({...form,event_type:e.target.value})}
-                  className="w-full bg-white/5 border border-white/10 focus:border-yellow-500 text-white px-4 py-3 text-sm outline-none transition-colors appearance-none">
-                  <option value="" className="bg-[#1a0a00]">Select Event Type</option>
-                  {eventTypes.map(t => <option key={t} value={t} className="bg-[#1a0a00]">{t}</option>)}
-                </select>
-                <textarea required value={form.message} onChange={e => setForm({...form,message:e.target.value})}
-                  placeholder="Tell us about your event — date, venue, guests..." rows={4}
-                  className="w-full bg-white/5 border border-white/10 focus:border-yellow-500 text-white px-4 py-3 text-sm outline-none transition-colors resize-none placeholder:text-white/30"/>
-                <button type="submit" disabled={loading}
-                  className="w-full flex items-center justify-center gap-3 py-4 bg-yellow-500 hover:bg-yellow-400 text-black font-bold tracking-widest uppercase text-sm transition-all disabled:opacity-50 hover:scale-[1.02]">
-                  <Send size={16}/>{loading ? 'Sending...' : 'Send Inquiry'}
-                </button>
-                {/* Mobile contact info */}
-                <div className="lg:hidden pt-6 space-y-3 border-t border-white/10">
-                  <a href="tel:+919999999999" className="flex items-center gap-3 text-white/60 hover:text-yellow-400 transition-colors text-sm">
-                    <Phone size={14} className="text-yellow-500"/><span>+91 99999 99999</span>
-                  </a>
-                  <a href="mailto:info@geetsolutions.in" className="flex items-center gap-3 text-white/60 hover:text-yellow-400 transition-colors text-sm">
-                    <Mail size={14} className="text-yellow-500"/><span>info@geetsolutions.in</span>
-                  </a>
-                </div>
-              </form>
-            )}
-          </div>
+              <select value={form.event_type} onChange={e=>setForm({...form,event_type:e.target.value})}
+                className="w-full bg-white/3 border border-white/8 focus:border-[#C9A84C]/60 text-white text-sm px-4 py-3.5 outline-none transition-colors appearance-none">
+                <option value="" className="bg-[#0d0d0d]">Event Type</option>
+                {types.map(t=><option key={t} value={t} className="bg-[#0d0d0d]">{t}</option>)}
+              </select>
+              <textarea required value={form.message} onChange={e=>setForm({...form,message:e.target.value})} placeholder="Tell us about your vision..." rows={4}
+                className="w-full bg-white/3 border border-white/8 focus:border-[#C9A84C]/60 text-white text-sm px-4 py-3.5 outline-none transition-colors resize-none placeholder:text-white/20"/>
+              <button type="submit" disabled={loading}
+                className="w-full flex items-center justify-center gap-2.5 py-4 bg-[#C9A84C] hover:bg-[#e0bc5a] text-black font-bold text-xs tracking-[0.25em] uppercase transition-all disabled:opacity-50 hover:scale-[1.01]">
+                <Send size={13}/>{loading?'Sending...':'Send Message'}
+              </button>
+            </form>
+          )}
         </div>
       </div>
     </section>
