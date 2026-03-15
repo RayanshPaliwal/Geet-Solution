@@ -1,53 +1,56 @@
 'use client'
-export default function About() {
-  return (
-    <section id="about" className="bg-black">
-      {/* Big 2-col photo layout */}
-      <div className="grid md:grid-cols-2 min-h-[70vh]">
-        <div className="relative overflow-hidden min-h-[50vh]">
-          <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=1200&auto=format&fit=crop"
-            alt="Musical Event" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"/>
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"/>
-          <div className="absolute bottom-8 left-8">
-            <p className="text-yellow-400 text-xs tracking-[0.3em] uppercase mb-1">Musical Nights</p>
-            <p className="text-white text-2xl font-serif">Ghazal & Sufi Evenings</p>
+export default function About(){
+  const imgs=[
+    {src:'https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=800&auto=format&fit=crop',label:'Corporate'},
+    {src:'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop',label:'Weddings'},
+    {src:'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?q=80&w=800&auto=format&fit=crop',label:'Musical Nights'},
+    {src:'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=800&auto=format&fit=crop',label:'Celebrations'},
+    {src:'https://images.unsplash.com/photo-1529070538774-1843cb3265df?q=80&w=800&auto=format&fit=crop',label:'Government'},
+    {src:'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=800&auto=format&fit=crop',label:'Ghazal Evenings'},
+  ]
+  return(
+    <section id="about" className="bg-[#0d0d0d] py-24">
+      <div className="max-w-screen-xl mx-auto px-8 md:px-16 lg:px-24 mb-14">
+        <div className="grid md:grid-cols-2 gap-12 items-end">
+          <div>
+            <p className="text-[#C9A84C] text-[10px] tracking-[0.5em] uppercase mb-4">Who We Are</p>
+            <h2 className="text-white text-4xl md:text-5xl font-bold leading-tight tracking-tight">
+              Creating Events<br/>That <span className="text-[#C9A84C]">Inspire</span>
+            </h2>
           </div>
-        </div>
-        <div className="relative overflow-hidden min-h-[50vh]">
-          <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=1200&auto=format&fit=crop"
-            alt="Corporate Event" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"/>
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"/>
-          <div className="absolute bottom-8 left-8">
-            <p className="text-yellow-400 text-xs tracking-[0.3em] uppercase mb-1">Corporate</p>
-            <p className="text-white text-2xl font-serif">Conferences & Meets</p>
-          </div>
+          <p className="text-white/40 text-sm leading-relaxed font-light">
+            Geet Solutions is a premium event management company. From corporate conferences to royal weddings, musical nights to government programs — we craft each moment with precision and passion.
+          </p>
         </div>
       </div>
 
-      {/* Stats bar */}
-      <div className="bg-yellow-500 grid grid-cols-2 md:grid-cols-4">
-        {[['500+','Events'],['10+','Years'],['50+','Artists'],'100% Satisfaction'.split(' ').slice(0,1).concat(['Satisfaction'])].map((item, i) => {
-          const num = Array.isArray(item) ? item[0] : ''
-          const label = Array.isArray(item) ? item[1] : ''
-          const pairs = [['500+','Events'],['10+','Years'],['50+','Artists'],['100%','Satisfaction']]
-          return (
-            <div key={i} className="py-6 text-center border-r border-black/10 last:border-0">
-              <div className="text-3xl font-bold text-black font-serif">{pairs[i][0]}</div>
-              <div className="text-black/70 text-xs tracking-widest uppercase mt-1">{pairs[i][1]}</div>
+      {/* Horizontal scroll strip - SMALL peek of images */}
+      <div className="overflow-x-auto scrollbar-none pl-8 md:pl-16 lg:pl-24">
+        <div className="flex gap-4 pb-2" style={{width:'max-content'}}>
+          {imgs.map((img,i)=>(
+            <div key={i} className="relative overflow-hidden flex-shrink-0 group" style={{width:'280px',height:'360px'}}>
+              <img src={img.src} alt={img.label} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"/>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"/>
+              <div className="absolute bottom-5 left-5">
+                <p className="text-[#C9A84C] text-[9px] tracking-[0.3em] uppercase font-medium">{img.label}</p>
+              </div>
             </div>
-          )
-        })}
+          ))}
+          {/* Spacer */}
+          <div className="flex-shrink-0 w-8"/>
+        </div>
       </div>
 
-      {/* About text - minimal */}
-      <div className="max-w-4xl mx-auto px-6 py-20 text-center">
-        <p className="text-yellow-400 text-xs tracking-[0.4em] uppercase mb-4">About Geet Solutions</p>
-        <h2 className="text-white text-4xl md:text-5xl font-serif leading-tight mb-6">
-          Udaipur&apos;s Premier<br/>Event Creators
-        </h2>
-        <p className="text-white/60 text-lg leading-relaxed max-w-2xl mx-auto">
-          From royal weddings to government ceremonies — we craft every moment with precision, elegance and passion.
-        </p>
+      {/* Stats */}
+      <div className="max-w-screen-xl mx-auto px-8 md:px-16 lg:px-24 mt-16">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-0 border border-white/8">
+          {[['500+','Events Delivered'],['10+','Years of Excellence'],['50+','Artists Managed'],['100%','Client Satisfaction']].map(([n,l],i)=>(
+            <div key={i} className="py-10 px-8 border-r border-b border-white/8 last:border-r-0 md:border-b-0">
+              <div className="text-[#C9A84C] text-4xl font-bold mb-1 tracking-tight">{n}</div>
+              <div className="text-white/30 text-xs tracking-widest uppercase">{l}</div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   )
