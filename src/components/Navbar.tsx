@@ -2,60 +2,64 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { Menu, X, Phone } from 'lucide-react'
-const navLinks = [
-  {href:'/',label:'Home'},{href:'/#about',label:'About Us'},
-  {href:'/#services',label:'Services'},{href:'/#events',label:'Events'},
-  {href:'/#gallery',label:'Gallery'},{href:'/#contact',label:'Contact'},
-]
+
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   useEffect(() => {
-    const h = () => setScrolled(window.scrollY > 50)
+    const h = () => setScrolled(window.scrollY > 80)
     window.addEventListener('scroll', h); return () => window.removeEventListener('scroll', h)
   }, [])
   return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-500 ${scrolled ? 'bg-[#0a0005]/95 backdrop-blur-md shadow-lg border-b border-yellow-500/20' : 'bg-transparent'}`}>
-      <div className="h-0.5 bg-gradient-to-r from-transparent via-yellow-500 to-transparent" />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 md:h-20">
-          <Link href="/" className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-yellow-900/30 border border-yellow-500/40 rounded-sm flex items-center justify-center">
-              <span className="font-serif text-yellow-400 text-xl font-bold">G</span>
-            </div>
-            <div>
-              <div className="font-serif text-xl text-yellow-400 leading-none tracking-wide">Geet</div>
-              <div className="text-xs text-orange-400 tracking-[0.2em] uppercase leading-none">Solutions</div>
-            </div>
-          </Link>
-          <div className="hidden md:flex items-center gap-1">
-            {navLinks.map(link => (
-              <Link key={link.href} href={link.href} className="px-3 py-2 text-sm text-yellow-100/70 hover:text-yellow-400 transition-colors duration-300 relative group tracking-wide">
-                {link.label}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-yellow-400 group-hover:w-full transition-all duration-300" />
-              </Link>
+    <nav className={`fixed top-0 w-full z-50 transition-all duration-500 ${scrolled ? 'bg-black/90 backdrop-blur-md' : 'bg-transparent'}`}>
+      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        {/* Logo */}
+        <Link href="/" className="flex items-center gap-3 group">
+          <svg viewBox="0 0 60 60" className="w-10 h-10 flex-shrink-0">
+            <circle cx="30" cy="30" r="28" fill="none" stroke="#D4AF37" strokeWidth="1.5"/>
+            <circle cx="30" cy="30" r="10" fill="#8B0000"/>
+            {[0,45,90,135,180,225,270,315].map((a,i) => (
+              <ellipse key={i} cx={30+16*Math.cos(a*Math.PI/180)} cy={30+16*Math.sin(a*Math.PI/180)}
+                rx="4" ry="2" fill="#D4AF37" transform={`rotate(${a},${30+16*Math.cos(a*Math.PI/180)},${30+16*Math.sin(a*Math.PI/180)})`}/>
             ))}
+            <text x="30" y="33" textAnchor="middle" fontSize="9" fill="#D4AF37" fontFamily="serif" fontWeight="bold">GS</text>
+          </svg>
+          <div className="hidden sm:block">
+            <div className="text-yellow-400 font-serif text-lg font-bold leading-none tracking-wider">GEET</div>
+            <div className="text-yellow-600 text-xs tracking-[0.3em]">SOLUTIONS</div>
           </div>
-          <div className="flex items-center gap-3">
-            <a href="tel:+919999999999" className="hidden md:flex items-center gap-2 px-4 py-2 bg-red-900 hover:bg-red-800 border border-yellow-500/40 text-yellow-300 text-sm transition-all">
-              <Phone size={14} /> Book Event
-            </a>
-            <button onClick={() => setIsOpen(!isOpen)} className="md:hidden text-yellow-400 p-2">
-              {isOpen ? <X size={24}/> : <Menu size={24}/>}
-            </button>
-          </div>
+        </Link>
+
+        {/* Desktop Nav */}
+        <div className="hidden md:flex items-center gap-8">
+          {[['/#about','About'],['/#services','Services'],['/#events','Events'],['/#gallery','Gallery'],['/#contact','Contact']].map(([href,label]) => (
+            <Link key={href} href={href} className="text-white/80 hover:text-yellow-400 text-sm tracking-widest uppercase transition-colors">{label}</Link>
+          ))}
+        </div>
+
+        {/* CTA */}
+        <div className="flex items-center gap-3">
+          <a href="tel:+919999999999" className="hidden md:flex items-center gap-2 px-5 py-2.5 bg-yellow-500 hover:bg-yellow-400 text-black font-bold text-xs tracking-widest uppercase transition-all">
+            <Phone size={13}/> Call Now
+          </a>
+          <button onClick={() => setIsOpen(!isOpen)} className="md:hidden text-white p-2">
+            {isOpen ? <X size={22}/> : <Menu size={22}/>}
+          </button>
         </div>
       </div>
+
+      {/* Mobile */}
       {isOpen && (
-        <div className="md:hidden bg-[#0a0005]/98 backdrop-blur-xl border-t border-yellow-500/20">
-          <div className="px-6 py-4 space-y-1">
-            {navLinks.map(link => (
-              <Link key={link.href} href={link.href} onClick={() => setIsOpen(false)}
-                className="block px-4 py-3 text-yellow-100/70 hover:text-yellow-400 hover:bg-yellow-500/10 transition-all border-b border-yellow-500/10 font-body">
-                {link.label}
-              </Link>
-            ))}
-          </div>
+        <div className="md:hidden bg-black/95 backdrop-blur-xl border-t border-yellow-500/20 px-6 py-6 space-y-4">
+          {[['/#about','About'],['/#services','Services'],['/#events','Events'],['/#gallery','Gallery'],['/#contact','Contact']].map(([href,label]) => (
+            <Link key={href} href={href} onClick={() => setIsOpen(false)}
+              className="block text-white/70 hover:text-yellow-400 text-sm tracking-widest uppercase py-2 border-b border-white/10 transition-colors">
+              {label}
+            </Link>
+          ))}
+          <a href="tel:+919999999999" className="flex items-center gap-2 mt-4 px-5 py-3 bg-yellow-500 text-black font-bold text-sm tracking-widest uppercase justify-center">
+            <Phone size={14}/> Book Event
+          </a>
         </div>
       )}
     </nav>
