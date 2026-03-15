@@ -2,29 +2,94 @@
 import Link from 'next/link'
 export default function Hero(){
   return(
-    <section className="relative h-screen w-full overflow-hidden bg-[#0d0d0d]">
-      <div className="absolute inset-0">
-        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop" alt="" className="w-full h-full object-cover object-center opacity-60"/>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/90"/>
-        <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-transparent"/>
+    <section className="relative min-h-screen w-full overflow-hidden bg-[#C1121F]">
+      {/* Rajasthani Jali pattern bg */}
+      <div className="absolute inset-0 opacity-10">
+        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="jali" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse">
+              <circle cx="40" cy="40" r="30" fill="none" stroke="white" strokeWidth="0.8"/>
+              <circle cx="40" cy="40" r="18" fill="none" stroke="white" strokeWidth="0.6"/>
+              <circle cx="40" cy="40" r="6" fill="white"/>
+              <line x1="40" y1="10" x2="40" y2="70" stroke="white" strokeWidth="0.5"/>
+              <line x1="10" y1="40" x2="70" y2="40" stroke="white" strokeWidth="0.5"/>
+              <line x1="19" y1="19" x2="61" y2="61" stroke="white" strokeWidth="0.4"/>
+              <line x1="61" y1="19" x2="19" y2="61" stroke="white" strokeWidth="0.4"/>
+              <ellipse cx="40" cy="13" rx="4" ry="6" fill="white" opacity="0.6"/>
+              <ellipse cx="40" cy="13" rx="4" ry="6" fill="white" opacity="0.6" transform="rotate(45 40 40)"/>
+              <ellipse cx="40" cy="13" rx="4" ry="6" fill="white" opacity="0.6" transform="rotate(90 40 40)"/>
+              <ellipse cx="40" cy="13" rx="4" ry="6" fill="white" opacity="0.6" transform="rotate(135 40 40)"/>
+              <ellipse cx="40" cy="13" rx="4" ry="6" fill="white" opacity="0.6" transform="rotate(180 40 40)"/>
+              <ellipse cx="40" cy="13" rx="4" ry="6" fill="white" opacity="0.6" transform="rotate(225 40 40)"/>
+              <ellipse cx="40" cy="13" rx="4" ry="6" fill="white" opacity="0.6" transform="rotate(270 40 40)"/>
+              <ellipse cx="40" cy="13" rx="4" ry="6" fill="white" opacity="0.6" transform="rotate(315 40 40)"/>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#jali)"/>
+        </svg>
       </div>
-      <div className="relative z-10 h-full flex flex-col justify-end pb-20 px-8 md:px-16 lg:px-24 max-w-screen-xl mx-auto">
-        <div className="max-w-2xl">
-          <p className="text-[#C9A84C] text-[10px] tracking-[0.5em] uppercase mb-5 font-medium">Premium Event Management</p>
-          <h1 className="text-white text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] mb-6 tracking-tight">
-            Moments<br/><span className="text-[#C9A84C]">Crafted</span><br/>with Heart
+
+      {/* Hero image — right side only, diagonal clip */}
+      <div className="absolute right-0 top-0 w-full md:w-[55%] h-full">
+        <div className="absolute inset-0" style={{clipPath:'polygon(15% 0, 100% 0, 100% 100%, 0% 100%)'}}>
+          <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1200&auto=format&fit=crop"
+            alt="" className="w-full h-full object-cover opacity-70"/>
+          <div className="absolute inset-0 bg-gradient-to-r from-[#C1121F] via-[#C1121F]/40 to-transparent"/>
+        </div>
+      </div>
+
+      {/* Floating Rajasthani mandala decoration */}
+      <div className="absolute top-20 right-[48%] md:right-[52%] w-24 h-24 opacity-20 animate-spin-slow hidden md:block">
+        <svg viewBox="0 0 100 100">
+          {[0,30,60,90,120,150,180,210,240,270,300,330].map((a,i)=>(
+            <ellipse key={i} cx="50" cy="18" rx="6" ry="14" fill="#FFF8F0" transform={`rotate(${a} 50 50)`}/>
+          ))}
+          <circle cx="50" cy="50" r="12" fill="#FF6B35"/>
+        </svg>
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 h-screen flex flex-col justify-center px-8 md:px-16 lg:px-24 max-w-screen-xl mx-auto">
+        <div className="max-w-xl">
+          {/* Hindi tag */}
+          <div className="inline-flex items-center gap-2 mb-6 px-4 py-1.5 bg-[#FF6B35] rounded-full">
+            <span className="font-hindi text-white text-sm font-semibold">हर पल यादगार</span>
+            <span className="text-white/60">•</span>
+            <span className="text-white/80 text-xs tracking-wider">Est. 2014</span>
+          </div>
+
+          <h1 className="font-display text-white font-extrabold leading-[0.9] mb-6 text-5xl md:text-7xl lg:text-8xl tracking-tight">
+            EVENTS<br/>
+            <span className="text-[#FF6B35]">THAT</span><br/>
+            HIT DIFF
           </h1>
-          <p className="text-white/50 text-sm md:text-base mb-10 max-w-md leading-relaxed font-light">
-            From intimate gatherings to grand productions — we transform ideas into unforgettable experiences.
+
+          <p className="text-white/70 text-base md:text-lg mb-10 max-w-md leading-relaxed font-light">
+            Corporate. Weddings. Concerts. Ghazal Nights.<br/>
+            We make every moment unforgettable. ✨
           </p>
+
           <div className="flex flex-wrap gap-3">
-            <Link href="/#contact" className="px-8 py-3.5 bg-[#C9A84C] hover:bg-[#e0bc5a] text-black font-bold text-xs tracking-[0.2em] uppercase transition-all hover:scale-105">
-              Book Your Event
+            <Link href="/#contact" className="px-8 py-3.5 bg-white hover:bg-[#FFF8F0] text-[#C1121F] font-bold text-sm tracking-wide uppercase transition-all hover:scale-105 shadow-lg rounded-sm">
+              Book Now 🔥
             </Link>
-            <Link href="/#gallery" className="px-8 py-3.5 border border-white/20 hover:border-[#C9A84C] text-white/70 hover:text-[#C9A84C] font-bold text-xs tracking-[0.2em] uppercase transition-all">
-              View Our Work
+            <Link href="/#gallery" className="px-8 py-3.5 border-2 border-white/40 hover:border-white text-white font-bold text-sm tracking-wide uppercase transition-all rounded-sm">
+              See Our Work
             </Link>
           </div>
+        </div>
+      </div>
+
+      {/* Scrolling marquee at bottom */}
+      <div className="absolute bottom-0 left-0 right-0 bg-[#FF6B35] py-2.5 overflow-hidden">
+        <div className="flex animate-marquee whitespace-nowrap">
+          {[...Array(2)].map((_,ri)=>(
+            <div key={ri} className="flex items-center gap-6 pr-6">
+              {['Weddings ✦','Corporate Events ✦','Musical Nights ✦','Ghazal Evenings ✦','Mushaira ✦','Government Programs ✦','Open Mic ✦','Artist Management ✦'].map((t,i)=>(
+                <span key={i} className="text-white font-bold text-xs tracking-[0.2em] uppercase">{t}</span>
+              ))}
+            </div>
+          ))}
         </div>
       </div>
     </section>
