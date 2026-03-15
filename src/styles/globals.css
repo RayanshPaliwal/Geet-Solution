@@ -1,17 +1,40 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Serif+Devanagari:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;600;700;800&family=Noto+Serif+Devanagari:wght@400;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+:root{
+  --saffron:#FF6B35;
+  --deep-red:#C1121F;
+  --cream:#FFF8F0;
+  --white:#FFFFFF;
+  --dark:#1A0A00;
+  --gold:#D4A017;
+}
 *{box-sizing:border-box;padding:0;margin:0;}
 html{scroll-behavior:smooth;}
-body{background:#0d0d0d;color:#fff;font-family:'Inter',sans-serif;overflow-x:hidden;}
-/* Hide scrollbar everywhere */
+body{background:var(--cream);color:var(--dark);font-family:'Space Grotesk',sans-serif;overflow-x:hidden;}
 .scrollbar-none{-ms-overflow-style:none;scrollbar-width:none;}
 .scrollbar-none::-webkit-scrollbar{display:none;}
 ::-webkit-scrollbar{width:3px;}
-::-webkit-scrollbar-track{background:#0d0d0d;}
-::-webkit-scrollbar-thumb{background:#C9A84C;}
-::selection{background:rgba(201,168,76,.25);color:#fff;}
-img{display:block;}
-select option{background:#0d0d0d;}
+::-webkit-scrollbar-track{background:var(--cream);}
+::-webkit-scrollbar-thumb{background:var(--saffron);}
+::selection{background:rgba(255,107,53,.25);color:var(--dark);}
 .font-hindi{font-family:'Noto Serif Devanagari',serif;}
+.font-display{font-family:'Syne',sans-serif;}
+select option{background:var(--cream);color:var(--dark);}
+/* Rajasthani jali pattern */
+.jali-bg{
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23FF6B35' stroke-width='0.5' opacity='0.15'%3E%3Ccircle cx='30' cy='30' r='20'/%3E%3Ccircle cx='30' cy='30' r='12'/%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3Cpath d='M30 10 L30 50 M10 30 L50 30 M16 16 L44 44 M44 16 L16 44'/%3E%3Cellipse cx='30' cy='19' rx='3' ry='5' transform='rotate(0 30 30)'/%3E%3Cellipse cx='30' cy='19' rx='3' ry='5' transform='rotate(45 30 30)'/%3E%3Cellipse cx='30' cy='19' rx='3' ry='5' transform='rotate(90 30 30)'/%3E%3Cellipse cx='30' cy='19' rx='3' ry='5' transform='rotate(135 30 30)'/%3E%3C/g%3E%3C/svg%3E");
+}
+/* Lotus border pattern */
+.lotus-border{
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='20' viewBox='0 0 40 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23C1121F' opacity='0.3'%3E%3Cellipse cx='20' cy='18' rx='6' ry='10'/%3E%3Cellipse cx='10' cy='18' rx='4' ry='7'/%3E%3Cellipse cx='30' cy='18' rx='4' ry='7'/%3E%3Cellipse cx='2' cy='18' rx='2.5' ry='5'/%3E%3Cellipse cx='38' cy='18' rx='2.5' ry='5'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat:repeat-x;
+  background-size:40px 20px;
+}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes spin-slow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.animate-marquee{animation:marquee 20s linear infinite;}
+.animate-float{animation:float 4s ease-in-out infinite;}
+.animate-spin-slow{animation:spin-slow 25s linear infinite;}
