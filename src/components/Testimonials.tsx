@@ -14,27 +14,22 @@ export default function Testimonials(){
   useEffect(()=>{if(items.length<=1)return;const t=setInterval(()=>setCur(p=>(p+1)%items.length),5000);return()=>clearInterval(t)},[items.length])
   return(
     <section className="bg-[#FFF8F0] py-24 relative overflow-hidden border-t-4 border-[#FF6B35]">
-      {/* Rajasthani decorative border pattern top */}
-      <div className="absolute top-4 left-0 right-0 flex justify-center">
-        <svg viewBox="0 0 400 16" className="w-full max-w-lg h-4">
-          {Array.from({length:20}).map((_,i)=>(
-            <g key={i}>
-              <diamond points={`${i*20+10},0 ${i*20+14},8 ${i*20+10},16 ${i*20+6},8`}/>
-              <polygon points={`${i*20+10},2 ${i*20+13},8 ${i*20+10},14 ${i*20+7},8`} fill="#FF6B35" opacity="0.4"/>
-            </g>
-          ))}
-        </svg>
+      {/* Decorative diamond row using CSS */}
+      <div className="absolute top-4 left-0 right-0 flex justify-center gap-3 px-8">
+        {Array.from({length:16}).map((_,i)=>(
+          <div key={i} className="w-2 h-2 bg-[#FF6B35]/30 rotate-45 flex-shrink-0"/>
+        ))}
       </div>
-      {/* Big decorative quote mark */}
-      <div className="absolute top-10 left-8 text-[180px] leading-none text-[#FF6B35]/8 font-serif pointer-events-none select-none">&ldquo;</div>
-      <div className="max-w-3xl mx-auto px-8 text-center relative z-10">
+      {/* Big decorative quote */}
+      <div className="absolute top-8 left-6 text-[160px] leading-none text-[#FF6B35]/8 font-serif pointer-events-none select-none">&ldquo;</div>
+      <div className="max-w-3xl mx-auto px-8 text-center relative z-10 pt-4">
         <span className="inline-block px-3 py-1 bg-[#FF6B35]/15 text-[#FF6B35] text-[10px] tracking-[0.4em] uppercase font-bold rounded-full mb-8">Client Love ❤️</span>
         {items.length>0&&(
           <>
             <div className="flex justify-center gap-1 mb-6">
               {[...Array(5)].map((_,i)=><Star key={i} size={16} className="text-[#FF6B35] fill-[#FF6B35]"/>)}
             </div>
-            <p className="text-[#1A0A00] text-xl md:text-2xl font-medium leading-relaxed mb-8">
+            <p className="text-[#1A0A00] text-xl md:text-2xl font-medium leading-relaxed mb-8 italic">
               &ldquo;{items[cur]?.message}&rdquo;
             </p>
             <div className="w-10 h-1 bg-[#FF6B35] mx-auto mb-5 rounded-full"/>
