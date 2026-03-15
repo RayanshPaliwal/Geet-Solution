@@ -9,18 +9,18 @@ export default function About(){
     {src:'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=600&auto=format&fit=crop',label:'Literary'},
   ]
   return(
-    <section id="about" className="bg-[#FFF8F0] py-24 relative overflow-hidden">
-      {/* Decorative Rajasthani arch top border */}
-      <div className="absolute top-0 left-0 right-0 h-3 bg-[#C1121F]"/>
-      <div className="absolute top-3 left-0 right-0 flex justify-center overflow-hidden h-8">
-        <svg viewBox="0 0 1440 32" className="w-full" preserveAspectRatio="none">
-          {Array.from({length:36}).map((_,i)=>(
-            <ellipse key={i} cx={i*40+20} cy="0" rx="16" ry="20" fill="#C1121F"/>
-          ))}
+    <section id="about" className="bg-[#FFF8F0] pt-16 pb-24 relative overflow-hidden">
+      {/* Top red border */}
+      <div className="absolute top-0 left-0 right-0 h-4 bg-[#C1121F]"/>
+      {/* Arch/scallop decorative border */}
+      <div className="absolute top-4 left-0 right-0 overflow-hidden" style={{height:'28px'}}>
+        <svg viewBox="0 0 1440 28" preserveAspectRatio="none" className="w-full h-full">
+          <path d={Array.from({length:36}).map((_,i)=>{
+            const x=i*40; return `M${x} 0 Q${x+20} 28 ${x+40} 0`
+          }).join(' ')} fill="#C1121F"/>
         </svg>
       </div>
-
-      <div className="max-w-screen-xl mx-auto px-8 md:px-16 lg:px-24 pt-8">
+      <div className="max-w-screen-xl mx-auto px-8 md:px-16 lg:px-24 pt-10">
         <div className="grid md:grid-cols-2 gap-12 items-end mb-14">
           <div>
             <span className="inline-block px-3 py-1 bg-[#FF6B35]/15 text-[#FF6B35] text-[10px] tracking-[0.4em] uppercase font-bold rounded-full mb-4">Who We Are</span>
@@ -28,18 +28,15 @@ export default function About(){
               Creating Events<br/>That <span className="text-[#C1121F]">Inspire</span>
             </h2>
           </div>
-          <div>
-            <p className="text-[#1A0A00]/50 text-sm leading-relaxed">
-              Geet Solutions is Rajasthan&apos;s premium event management company. From royal weddings to government ceremonies, musical nights to corporate meets — we craft each moment with passion and precision.
-            </p>
-          </div>
+          <p className="text-[#1A0A00]/50 text-sm leading-relaxed">
+            Geet Solutions is Rajasthan&apos;s premium event management company. From royal weddings to government ceremonies, musical nights to corporate meets — we craft each moment with passion and precision.
+          </p>
         </div>
-
-        {/* Horizontal scroll - small peek photos */}
+        {/* Horizontal scroll photos */}
         <div className="overflow-x-auto scrollbar-none -mx-4 px-4">
           <div className="flex gap-3 pb-2" style={{width:'max-content'}}>
             {imgs.map((img,i)=>(
-              <div key={i} className="relative flex-shrink-0 overflow-hidden group" style={{width:'220px',height:'300px'}}>
+              <div key={i} className="relative flex-shrink-0 overflow-hidden group" style={{width:'220px',height:'280px'}}>
                 <img src={img.src} alt={img.label} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"/>
                 <div className="absolute inset-0 bg-gradient-to-t from-[#1A0A00]/70 to-transparent"/>
                 <div className="absolute bottom-4 left-4">
@@ -49,20 +46,18 @@ export default function About(){
             ))}
           </div>
         </div>
-
         {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 mt-14 border border-[#FF6B35]/20 divide-x divide-y md:divide-y-0 divide-[#FF6B35]/20">
+        <div className="grid grid-cols-2 md:grid-cols-4 mt-14 border border-[#FF6B35]/20">
           {[['500+','Events'],['10+','Years'],['50+','Artists'],['100%','Happy Clients']].map(([n,l],i)=>(
-            <div key={i} className="py-8 px-6 text-center bg-white hover:bg-[#FF6B35] group transition-colors duration-300">
+            <div key={i} className="py-8 px-6 text-center border-r border-b md:border-b-0 border-[#FF6B35]/20 last:border-r-0 bg-white hover:bg-[#FF6B35] group transition-colors duration-300">
               <div className="font-display text-[#C1121F] group-hover:text-white text-3xl font-extrabold mb-1 transition-colors">{n}</div>
               <div className="text-[#1A0A00]/40 group-hover:text-white/70 text-[10px] tracking-widest uppercase transition-colors">{l}</div>
             </div>
           ))}
         </div>
       </div>
-
-      {/* Bottom arch border */}
-      <div className="absolute bottom-0 left-0 right-0 h-3 bg-[#C1121F] mt-2"/>
+      {/* Bottom border */}
+      <div className="absolute bottom-0 left-0 right-0 h-3 bg-[#C1121F]"/>
     </section>
   )
 }
