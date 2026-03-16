@@ -1,73 +1,101 @@
 'use client'
-import {useState, useEffect} from 'react'
+import {useEffect,useState} from 'react'
 import Link from 'next/link'
-import {Menu, X} from 'lucide-react'
 
 export default function Navbar(){
-  const [scrolled, setScrolled] = useState(false)
-  const [open, setOpen] = useState(false)
+  const [scrolled,setScrolled]=useState(false)
+  const [menuOpen,setMenuOpen]=useState(false)
+
   useEffect(()=>{
     const fn=()=>setScrolled(window.scrollY>20)
     window.addEventListener('scroll',fn)
     return()=>window.removeEventListener('scroll',fn)
   },[])
-  const links=[['About','/#about'],['Services','/#services'],['Events','/#events'],['Gallery','/#gallery'],['Contact','/#contact']]
+
+  // Scanline effect
+  useEffect(()=>{
+    const el=document.createElement('div')
+    el.className='scanline'
+    document.body.appendChild(el)
+    return()=>el.remove()
+  },[])
+
+  const links=[
+    {href:'/#about',label:'About'},
+    {href:'/#services',label:'Services'},
+    {href:'/#events',label:'Events'},
+    {href:'/#gallery',label:'Gallery'},
+    {href:'/#contact',label:'Contact'},
+  ]
+
   return(
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled?'bg-[#FFF8F0]/95 backdrop-blur-sm shadow-sm border-b border-[#FF6B35]/10':'bg-transparent'}`}>
-      <div className="max-w-screen-xl mx-auto px-6 md:px-12 lg:px-20 flex items-center justify-between h-16 md:h-20">
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled?'py-2':'py-4'}`}
+      style={{
+        background:scrolled?'rgba(13,13,13,0.95)':'transparent',
+        backdropFilter:scrolled?'blur(20px)':'none',
+        borderBottom:scrolled?'1px solid':'none',
+        animation:scrolled?'rgb-border 3s linear infinite':'none',
+      }}>
+      <div className="max-w-screen-xl mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-3 group flex-shrink-0">
-          <img 
-            src="/geet-logo.png" 
-            alt="Geet Solutions" 
-            className="h-12 md:h-14 w-auto object-contain drop-shadow-sm group-hover:drop-shadow-md transition-all"
-            onError={(e)=>{
-              e.currentTarget.style.display='none'
-              const next = e.currentTarget.nextElementSibling as HTMLElement
-              if(next) next.style.display='flex'
-            }}
-          />
-          {/* Fallback text logo */}
-          <div className="hidden items-center gap-2">
-            <div className="w-8 h-8 bg-[#C1121F] rounded-full flex items-center justify-center">
-              <span className="text-white font-bold text-sm font-serif">G</span>
-            </div>
-            <div>
-              <span className={`font-display font-bold text-lg leading-none ${scrolled?'text-[#C1121F]':'text-white'}`}>GEET</span>
-              <span className={`block text-[9px] tracking-[0.3em] uppercase font-medium leading-none ${scrolled?'text-[#1A0A00]/50':'text-white/60'}`}>SOLUTIONS</span>
-            </div>
+        <Link href="/" className="flex items-center gap-2 group">
+          <div className="relative">
+            {/* RGB glow behind logo text */}
+            <div className="absolute inset-0 blur-lg opacity-50 rgb-glow" style={{background:'transparent'}}/>
+            <span className="font-display text-xl font-black tracking-tight relative">
+              <span className="gradient-text glitch">GEET</span>
+              <span className="text-white/80 ml-1.5 text-sm font-medium tracking-[0.2em] uppercase">Solutions</span>
+            </span>
           </div>
         </Link>
-        {/* Desktop nav */}
-        <div className="hidden md:flex items-center gap-8">
-          {links.map(([l,h])=>(
-            <Link key={l} href={h} className={`text-xs font-bold tracking-[0.15em] uppercase transition-colors hover:text-[#FF6B35] ${scrolled?'text-[#1A0A00]/70':'text-white/80'}`}>{l}</Link>
+
+        {/* Desktop Nav */}
+        <nav className="hidden md:flex items-center gap-6">
+          {links.map(l=>(
+            <Link key={l.href} href={l.href}
+              className="text-white/50 hover:text-white text-xs tracking-[0.15em] uppercase font-medium transition-all duration-300 hover:neon-cyan relative group">
+              {l.label}
+              <span className="absolute -bottom-1 left-0 w-0 h-px bg-gradient-to-r from-[#00E5FF] to-[#A855F7] group-hover:w-full transition-all duration-300"/>
+            </Link>
           ))}
-          <Link href="/#contact" className="px-5 py-2.5 bg-[#C1121F] hover:bg-[#FF6B35] text-white text-xs font-bold tracking-[0.15em] uppercase transition-all rounded-sm shadow-md hover:shadow-lg">
-            Book Event
+        </nav>
+
+        {/* CTA Button */}
+        <div className="hidden md:flex items-center gap-3">
+          <Link href="/#contact"
+            className="px-5 py-2 text-xs tracking-[0.2em] uppercase font-bold transition-all duration-300 rounded-sm rgb-border-anim"
+            style={{color:'#00E5FF'}}>
+            Book Now
           </Link>
         </div>
-        {/* Mobile burger */}
-        <button onClick={()=>setOpen(!open)} className={`md:hidden p-2 transition-colors ${scrolled?'text-[#1A0A00]':'text-white'}`}>
-          {open?<X size={22}/>:<Menu size={22}/>}
+
+        {/* Mobile Menu Toggle */}
+        <button className="md:hidden flex flex-col gap-1.5 p-2" onClick={()=>setMenuOpen(!menuOpen)}>
+          <span className={`w-5 h-0.5 transition-all duration-300 ${menuOpen?'rotate-45 translate-y-2 bg-[#00E5FF]':'bg-white'}`}/>
+          <span className={`w-5 h-0.5 transition-all duration-300 ${menuOpen?'opacity-0':'bg-white'}`}/>
+          <span className={`w-5 h-0.5 transition-all duration-300 ${menuOpen?'-rotate-45 -translate-y-2 bg-[#00E5FF]':'bg-white'}`}/>
         </button>
       </div>
-      {/* Mobile menu */}
-      {open&&(
-        <div className="md:hidden bg-[#FFF8F0]/98 backdrop-blur-sm border-t border-[#FF6B35]/20 shadow-xl">
-          <div className="flex flex-col py-4 px-6 gap-1">
-            {links.map(([l,h])=>(
-              <Link key={l} href={h} onClick={()=>setOpen(false)}
-                className="py-3 text-[#1A0A00]/70 text-sm font-bold tracking-widest uppercase border-b border-[#FF6B35]/10 last:border-0 hover:text-[#C1121F] transition-colors">
-                {l}
-              </Link>
-            ))}
-            <Link href="/#contact" onClick={()=>setOpen(false)} className="mt-3 py-3 bg-[#C1121F] text-white text-xs font-bold tracking-[0.2em] uppercase text-center rounded-sm hover:bg-[#FF6B35] transition-all">
-              Book Event 🔥
+
+      {/* Mobile Menu */}
+      {menuOpen&&(
+        <div className="md:hidden absolute top-full left-0 right-0 border-t rgb-border-anim"
+          style={{background:'rgba(13,13,13,0.98)',backdropFilter:'blur(20px)'}}>
+          {links.map(l=>(
+            <Link key={l.href} href={l.href} onClick={()=>setMenuOpen(false)}
+              className="block px-6 py-4 text-white/60 hover:text-white border-b border-white/5 text-xs tracking-[0.2em] uppercase hover:neon-cyan transition-all">
+              {l.label}
+            </Link>
+          ))}
+          <div className="p-4">
+            <Link href="/#contact" onClick={()=>setMenuOpen(false)}
+              className="block text-center py-3 text-xs tracking-[0.2em] uppercase font-bold rgb-border-anim"
+              style={{color:'#00E5FF'}}>
+              Book Now
             </Link>
           </div>
         </div>
       )}
-    </nav>
+    </header>
   )
 }
