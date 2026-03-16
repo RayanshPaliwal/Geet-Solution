@@ -1,31 +1,36 @@
 /** @type {import('tailwindcss').Config} */
-module.exports={
-  content:['./src/pages/**/*.{js,ts,jsx,tsx,mdx}','./src/components/**/*.{js,ts,jsx,tsx,mdx}','./src/app/**/*.{js,ts,jsx,tsx,mdx}'],
-  theme:{
-    extend:{
-      colors:{
-        saffron:{'50':'#fff4ee','400':'#FF6B35','500':'#e55a24'},
-        red:{'700':'#C1121F','800':'#a50f1a'},
-        cream:'#FFF8F0',
-        dark:'#1A0A00',
-        gold:'#D4A017',
+module.exports = {
+  content: ['./src/**/*.{js,ts,jsx,tsx}'],
+  theme: {
+    extend: {
+      colors: {
+        saffron: '#FF6B35',
+        red: { DEFAULT: '#C1121F', dark: '#A10E19' },
+        cream: '#FFF8F0',
+        dark: '#1A0A00',
+        cyan: { DEFAULT: '#00E5FF', dark: '#00B8CC' },
+        purple: { DEFAULT: '#A855F7', dark: '#7C3AED' },
       },
-      fontFamily:{
-        display:['Syne','sans-serif'],
-        body:['Space Grotesk','sans-serif'],
-        hindi:['"Noto Serif Devanagari"','serif'],
+      fontFamily: {
+        sans: ['Space Grotesk', 'sans-serif'],
+        display: ['Syne', 'sans-serif'],
+        hindi: ['Noto Serif Devanagari', 'serif'],
       },
-      animation:{
-        'marquee':'marquee 25s linear infinite',
-        'float':'float 4s ease-in-out infinite',
-        'spin-slow':'spin-slow 30s linear infinite',
+      animation: {
+        marquee: 'marquee 20s linear infinite',
+        float: 'float 3s ease-in-out infinite',
+        'spin-slow': 'spin-slow 20s linear infinite',
+        'rgb-border': 'rgb-border 2s linear infinite',
+        'rgb-glow': 'rgb-glow 3s linear infinite',
+        'gradient-text': 'rgb-text-anim 4s ease infinite',
+        'scan-line': 'scan-line 5s linear infinite',
       },
-      keyframes:{
-        marquee:{'0%':{transform:'translateX(0)'},'100%':{transform:'translateX(-50%)'}},
-        float:{'0%,100%':{transform:'translateY(0)'},'50%':{transform:'translateY(-10px)'}},
-        'spin-slow':{'from':{transform:'rotate(0deg)'},'to':{transform:'rotate(360deg)'}},
+      keyframes: {
+        marquee: { from: { transform: 'translateX(0)' }, to: { transform: 'translateX(-50%)' } },
+        float: { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-10px)' } },
+        'spin-slow': { from: { transform: 'rotate(0deg)' }, to: { transform: 'rotate(360deg)' } },
       },
-    }
+    },
   },
-  plugins:[]
+  plugins: [],
 }
